@@ -12,11 +12,12 @@ Wszystkie animacje przewijania to czyste **CSS Scroll-driven Animations**
 | --- | --- |
 | Nagłówek | przejście z przezroczystego w kremowy + pasek postępu czytania |
 | Hero | zoom/paralaksa zdjęcia, tekst unosi się i zanika |
-| O mnie | „struny harfy” rysowane kolejno, łukowe zdjęcie odsłaniane `clip-path` |
+| O mnie | „struny harfy” rysowane kolejno, łukowe zdjęcie odsłaniane `clip-path`, złote podkreślenia kluczowych fraz |
 | Cytat | paralaksa tła, cytat wyostrza się w centrum ekranu |
 | Posłuchaj | karty wideo z rozłożoną paralaksą; na telefonie karuzela `view(inline)` |
 | Galeria | przewijanie pionowe przesuwa przypiętą poziomą taśmę zdjęć |
 | Opinie | karty „układające się w stos” (desktop) |
+| Pasek „Zadzwoń / Napisz” (telefon) | pojawia się po hero, chowa się przy sekcji Kontakt (`timeline-scope`) |
 
 Przeglądarki bez wsparcia (np. Firefox bez flagi) dostają pełną, statyczną wersję strony.
 `prefers-reduced-motion: reduce` wyłącza ruch.
