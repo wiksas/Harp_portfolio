@@ -71,6 +71,9 @@
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
 
+  /* Locked viewport height: JS pins it to the first measured innerHeight, so
+     collapsing mobile/in-app browser toolbars never resize sections (no jumps). */
+  --app-h: 100svh;
   --header-h: 76px;
   --container: 1200px;
   --gutter: clamp(1.25rem, 5vw, 3rem);
@@ -246,7 +249,7 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  min-height: max(100svh, 560px);
+  min-height: max(var(--app-h), 560px);
   display: grid; place-items: center;
   color: var(--cream);
   overflow: clip;
@@ -333,7 +336,7 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 
 /* ---------- Quote band ---------- */
 .band {
-  position: relative; min-height: clamp(420px, 80vh, 760px);
+  position: relative; min-height: clamp(420px, calc(var(--app-h) * .8), 760px);
   display: grid; place-items: center; overflow: clip; isolation: isolate;
   color: var(--cream); text-align: center;
 }
@@ -410,14 +413,35 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 .gallery__track li { flex: none; scroll-snap-align: center; }
 .gallery__track a { display: block; border-radius: var(--radius); overflow: hidden; cursor: zoom-in; }
 .gallery__track img {
-  height: min(62svh, 560px); width: auto; max-width: none;
+  height: min(calc(var(--app-h) * .62), 560px); width: auto; max-width: none;
   transition: scale .6s var(--ease);
 }
 .gallery__track a:hover img { scale: 1.04; }
 .gallery__progress { display: none; }
 
+.gallery__hint {
+  display: flex; align-items: center; justify-content: center; gap: .8rem;
+  margin: 0 auto; padding-inline: var(--gutter); text-align: center;
+  font: 500 .72rem/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase;
+  color: var(--wine);
+}
+.gallery__hint .hint-arrow {
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--gold); display: grid; place-items: center;
+}
+.gallery__hint .hint-arrow::before {
+  content: ""; width: 8px; height: 8px; margin-left: -3px;
+  border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold);
+  rotate: -45deg;                       /* → : swipe sideways */
+}
+.hint-text--scroll { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .gallery__hint .hint-arrow::before { animation: hint-nudge-x 1.6s var(--ease) infinite; }
+  @keyframes hint-nudge-x { 50% { translate: 4px 0; } }
+}
+
 @media (max-width: 640px) {
-  .gallery__track img { height: 52svh; }
+  .gallery__track img { height: calc(var(--app-h) * .52); }
 }
 
 /* ---------- Reviews ---------- */
@@ -479,22 +503,47 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   box-shadow: 0 50px 100px -40px rgb(0 0 0 / .5);
 }
 .contact-form > p { color: var(--muted); }
-.field { display: grid; gap: .4rem; margin-bottom: 1.1rem; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { display: grid; gap: .4rem; margin-bottom: 1.1rem; min-width: 0; }
+.field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .field label { font: 500 .72rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--wine); }
 .field label small { text-transform: none; letter-spacing: 0; color: var(--muted); font-weight: 400; }
 .field input, .field textarea {
-  width: 100%; font: 400 1rem/1.5 var(--sans); color: var(--ink);
+  display: block; width: 100%; min-width: 0; min-height: 3.25rem; margin: 0;
+  font: 400 1rem/1.5 var(--sans); color: var(--ink);
   padding: .8rem 1rem; border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
   background: #fff;
+  -webkit-appearance: none; appearance: none;
   transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
 }
+.field input::placeholder, .field textarea::placeholder { color: #a39490; opacity: 1; }
 .field input:focus, .field textarea:focus {
   outline: none; border-color: var(--gold);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 22%, transparent);
 }
 .field textarea { resize: vertical; min-height: 130px; }
+.field input { height: 3.25rem; }
+
+/* Date: own calendar icon + "Wybierz datę" placeholder (iOS shows an empty box otherwise);
+   the native picker indicator is stretched invisibly over the whole field, so any tap opens it. */
+.date-wrap { position: relative; }
+.date-wrap input { padding-right: 3rem; text-align: left; cursor: pointer; }
+.date-wrap input::-webkit-date-and-time-value { text-align: left; margin: 0; min-height: 1.5em; }
+.date-wrap input::-webkit-calendar-picker-indicator {
+  position: absolute; inset: 0; width: auto; height: auto; margin: 0; padding: 0;
+  opacity: 0; cursor: pointer;
+}
+.date-wrap svg {
+  position: absolute; right: 1rem; top: 50%; translate: 0 -50%;
+  width: 20px; height: 20px; fill: var(--gold); pointer-events: none;
+}
+.date-placeholder {
+  position: absolute; left: 1rem; right: 3rem; top: 50%; translate: 0 -50%;
+  color: #a39490; pointer-events: none; display: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.date-wrap input[data-empty]:not(:focus) + .date-placeholder { display: block; }
+.date-wrap input[data-empty]:not(:focus)::-webkit-datetime-edit { color: transparent; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .form-note { font-size: .8rem; color: var(--muted); }
 .contact-form .btn { width: 100%; }
@@ -507,7 +556,7 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   .contact__grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
-  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .field-row { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 
 /* ---------- Footer ---------- */
@@ -556,7 +605,7 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
     -webkit-backdrop-filter: none;
     animation: header-solid linear both;
     animation-timeline: scroll(root block);
-    animation-range: 0 70svh;
+    animation-range: 0 calc(var(--app-h) * .7);
   }
   @keyframes header-solid {
     0%, 60% {
@@ -609,15 +658,16 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
     .hero__content {
       animation: hero-out linear both;
       animation-timeline: view();
-      animation-range: exit -10% exit 60%;
+      animation-range: exit 0% exit 75%;
     }
     @keyframes hero-out {
-      to { opacity: 0; translate: 0 -18vh; scale: .94; filter: blur(4px); }
+      0%, 12% { opacity: 1; translate: 0 0; scale: 1; filter: blur(0); }
+      100% { opacity: 0; translate: 0 -18vh; scale: .94; filter: blur(4px); }
     }
     .hero__scroll {
       animation: fade-out linear both;
       animation-timeline: scroll(root block);
-      animation-range: 0 20svh;
+      animation-range: 0 calc(var(--app-h) * .2);
     }
     @keyframes fade-out { to { opacity: 0; } }
 
@@ -728,11 +778,12 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
     /* --- Gallery: vertical scroll drives a pinned horizontal track --- */
     .gallery__pin {
       view-timeline: --gallery block;
-      height: 380vh;
+      view-timeline-inset: 0px;   /* don't shrink by scroll-padding-top (header) */
+      height: calc(var(--app-h) * 6);
     }
     .gallery__sticky {
       position: sticky; top: 0;
-      height: 100svh;
+      height: var(--app-h);
       display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
       overflow: clip;
     }
@@ -747,7 +798,7 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
     @keyframes gallery-slide {
       to { translate: calc(-100% + 100vw) 0; }
     }
-    .gallery__track img { height: min(68svh, 620px); }
+    .gallery__track img { height: min(calc(var(--app-h) * .62), 600px); }
     .gallery__progress {
       display: block; width: min(100% - 2 * var(--gutter), 420px); height: 1px; margin-inline: auto;
       background: var(--line);
@@ -758,17 +809,34 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
       animation-timeline: --gallery;
       animation-range: contain 0% contain 100%;
     }
+    /* Hint: "keep scrolling" while pinned, fades out as the last photo arrives */
+    .hint-text--swipe { display: none; }
+    .hint-text--scroll { display: inline; }
+    .gallery__hint .hint-arrow::before {
+      margin: -3px 0 0; rotate: 45deg;     /* ↓ : keep scrolling */
+      animation: hint-nudge-y 1.6s var(--ease) infinite;
+    }
+    @keyframes hint-nudge-y { 50% { translate: 0 4px; } }
+    .gallery__hint {
+      animation: hint-fade linear both;
+      animation-timeline: --gallery;
+      animation-range: contain 0% contain 100%;
+    }
+    @keyframes hint-fade {
+      0%, 80% { opacity: 1; }
+      95%, 100% { opacity: 0; }
+    }
     @media (max-width: 640px) {
-      .gallery__pin { height: 420vh; }
+      .gallery__pin { height: calc(var(--app-h) * 7); }
       .gallery__track { padding: 0 10vw; }
-      .gallery__track img { height: 58svh; }
+      .gallery__track img { height: calc(var(--app-h) * .52); }
     }
 
     /* --- Reviews: stacking cards (only where a card fits on screen) --- */
     @media (min-width: 861px) and (min-height: 700px) {
       .review-stack {
         view-timeline: --reviews block;
-        padding-bottom: 6vh;
+        padding-bottom: calc(var(--app-h) * .06);
       }
       .review {
         position: sticky;

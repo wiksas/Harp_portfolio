@@ -1,3 +1,13 @@
+// --app-h is first set inline in <head>. Re-measure only when the width changes
+// (rotation, desktop resize) – NOT when mobile/in-app browser toolbars collapse,
+// which only change the height and would otherwise make the page jump.
+let lastWidth = innerWidth;
+addEventListener("resize", () => {
+  if (innerWidth === lastWidth) return;
+  lastWidth = innerWidth;
+  document.documentElement.style.setProperty("--app-h", `${innerHeight}px`);
+});
+
 // All animations are pure CSS (scroll-driven). This file only adds behaviour.
 
 // Mobile menu (popover): close after choosing a section.
@@ -41,6 +51,14 @@ lightbox.addEventListener("click", (e) => {
 });
 lightbox.addEventListener("close", () => lightboxImg.removeAttribute("src"));
 
+// Date field: no past dates; "Wybierz datę" placeholder while empty.
+const dateInput = document.getElementById("f-date");
+const today = new Date();
+dateInput.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+const syncDate = () => dateInput.toggleAttribute("data-empty", !dateInput.value);
+dateInput.addEventListener("input", syncDate);
+dateInput.addEventListener("change", syncDate);
+
 // Contact form: send via FormSubmit AJAX endpoint and stay on the page.
 // Without JS the form posts normally to the same service.
 const form = document.querySelector(".contact-form");
@@ -60,6 +78,7 @@ form.addEventListener("submit", async (e) => {
     const data = await res.json().catch(() => ({}));
     if (!res.ok || String(data.success) !== "true") throw new Error(data.message || res.statusText);
     form.reset();
+    syncDate();
     status.dataset.state = "ok";
     status.textContent = "Dziękuję! Wiadomość została wysłana – odezwę się najszybciej, jak to możliwe.";
   } catch {
