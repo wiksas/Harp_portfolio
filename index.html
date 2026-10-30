@@ -25,8 +25,8 @@
 
   <link rel="preload" href="assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/img/harfa-swieta-1400.webp" media="(min-aspect-ratio: 3/4)"
-        imagesrcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w, assets/img/harfa-swieta-2200.webp 2200w"
+  <link rel="preload" as="image" href="assets/img/hero-slub-1400.webp" media="(min-aspect-ratio: 3/4)"
+        imagesrcset="assets/img/hero-slub-1400.webp 1400w, assets/img/hero-slub-2200.webp 2200w"
         imagesizes="100vw">
   <link rel="preload" as="image" href="assets/img/hero-mobile-800.webp" media="(max-aspect-ratio: 3/4)"
         imagesrcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w"
@@ -47,7 +47,7 @@
     "logo": "https://marrywithharp.pl/assets/img/icon-512.png",
     "telephone": "+48509838509",
     "email": "marrywithharp@gmail.com",
-    "areaServed": "Kraków",
+    "areaServed": ["Kraków", "województwo małopolskie", "Polska"],
     "founder": { "@type": "Person", "name": "Justyna Sasnal", "jobTitle": "Harfistka" },
     "sameAs": [
       "https://www.facebook.com/justyna.sasnal/",
@@ -78,8 +78,10 @@
       <ul>
         <li><a href="#o-mnie">O mnie</a></li>
         <li><a href="#posluchaj">Posłuchaj</a></li>
+        <li><a href="#repertuar">Repertuar</a></li>
         <li><a href="#galeria">Galeria</a></li>
         <li><a href="#opinie">Opinie</a></li>
+        <li><a href="#pytania">Pytania</a></li>
         <li><a class="nav-cta" href="#kontakt">Kontakt</a></li>
       </ul>
     </nav>
@@ -91,9 +93,9 @@
       <picture class="hero__media">
         <source media="(max-aspect-ratio: 3/4)" width="1200" height="1800"
                 srcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w" sizes="100vw">
-        <img src="assets/img/harfa-swieta-1400.webp"
-             srcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w, assets/img/harfa-swieta-2200.webp 2200w"
-             sizes="100vw" width="2200" height="1684" alt="Justyna Sasnal grająca na harfie" fetchpriority="high">
+        <img src="assets/img/hero-slub-1400.webp"
+             srcset="assets/img/hero-slub-1400.webp 1400w, assets/img/hero-slub-2200.webp 2200w"
+             sizes="100vw" width="2200" height="1375" alt="Ceremonia ślubna w plenerze z harfistką Justyną Sasnal" fetchpriority="high">
       </picture>
       <div class="hero__content">
         <p class="eyebrow">Justyna Sasnal · harfistka</p>
@@ -158,7 +160,8 @@
             <video controls preload="none" playsinline poster="assets/img/poster-wejscie-pary-mlodej.webp" width="720" height="1280">
               <source src="assets/video/wejscie-pary-mlodej.mp4" type="video/mp4">
             </video>
-            <figcaption>Wejście Pary Młodej <span>Ceremonia w plenerze</span></figcaption>
+            <!-- TREŚĆ DO WERYFIKACJI: tytuły czterech nowych filmów są tymczasowe -->
+            <figcaption>A Thousand Years <span>Ch. Perri · wejście Pary Młodej</span></figcaption>
           </figure>
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-canon-in-d.webp" width="720" height="1080">
@@ -170,7 +173,7 @@
             <video controls preload="none" playsinline poster="assets/img/poster-taras-zachod-slonca.webp" width="720" height="1280">
               <source src="assets/video/taras-zachod-slonca.mp4" type="video/mp4">
             </video>
-            <figcaption>Taras o zachodzie słońca</figcaption>
+            <figcaption>River Flows in You <span>Yiruma</span></figcaption>
           </figure>
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-every-breath-540.webp" width="720" height="1280">
@@ -182,7 +185,7 @@
             <video controls preload="none" playsinline poster="assets/img/poster-ceremonia-kosciol.webp" width="720" height="1280">
               <source src="assets/video/ceremonia-kosciol.mp4" type="video/mp4">
             </video>
-            <figcaption>Ceremonia w kościele</figcaption>
+            <figcaption>Ave Maria <span>F. Schubert</span></figcaption>
           </figure>
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-nightingale.webp" width="720" height="1080">
@@ -194,7 +197,7 @@
             <video controls preload="none" playsinline poster="assets/img/poster-ceremonia-ogrod.webp" width="720" height="1280">
               <source src="assets/video/ceremonia-ogrod.mp4" type="video/mp4">
             </video>
-            <figcaption>Ceremonia w ogrodzie</figcaption>
+            <figcaption>Perfect <span>Ed Sheeran</span></figcaption>
           </figure>
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-ceremonia-341.webp" width="720" height="1280">
@@ -203,6 +206,66 @@
             <figcaption>Ceremonia w plenerze</figcaption>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <!-- REPERTUAR (TREŚĆ DO WERYFIKACJI: lista przykładowa) -->
+    <section id="repertuar" class="section repertoire" aria-labelledby="repertoire-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow reveal">Repertuar</p>
+          <h2 id="repertoire-title" class="reveal">Od klasyki po Waszą ulubioną piosenkę</h2>
+          <p class="reveal">Muzykę dobieram razem z Parą Młodą do każdego momentu uroczystości – od wejścia, przez przysięgę, po życzenia. Oto kilka propozycji z mojego repertuaru.</p>
+        </header>
+        <div class="rep-grid">
+          <article class="rep-card">
+            <span class="rep-card__num" aria-hidden="true">01</span>
+            <h3>Klasyka</h3>
+            <ul>
+              <li>Canon in D <span>J. Pachelbel</span></li>
+              <li>Ave Maria <span>F. Schubert</span></li>
+              <li>Air na strunie G <span>J.S. Bach</span></li>
+              <li>Arioso <span>J.S. Bach</span></li>
+              <li>Marsz weselny <span>F. Mendelssohn</span></li>
+              <li>Clair de lune <span>C. Debussy</span></li>
+            </ul>
+          </article>
+          <article class="rep-card">
+            <span class="rep-card__num" aria-hidden="true">02</span>
+            <h3>Muzyka popularna i filmowa</h3>
+            <ul>
+              <li>Every Breath You Take <span>The Police</span></li>
+              <li>A Thousand Years <span>Ch. Perri</span></li>
+              <li>Perfect <span>Ed Sheeran</span></li>
+              <li>Can't Help Falling in Love <span>E. Presley</span></li>
+              <li>River Flows in You <span>Yiruma</span></li>
+              <li>Hallelujah <span>L. Cohen</span></li>
+            </ul>
+          </article>
+          <article class="rep-card">
+            <span class="rep-card__num" aria-hidden="true">03</span>
+            <h3>Muzyka celtycka</h3>
+            <ul>
+              <li>The Nightingale <span>D. Henson-Conant</span></li>
+              <li>Sí Bheag, Sí Mhór <span>T. O'Carolan</span></li>
+              <li>Eleanor Plunkett <span>T. O'Carolan</span></li>
+              <li>Greensleeves <span>tradycyjna</span></li>
+              <li>Scarborough Fair <span>tradycyjna</span></li>
+            </ul>
+          </article>
+          <article class="rep-card">
+            <span class="rep-card__num" aria-hidden="true">04</span>
+            <h3>Pieśni kościelne</h3>
+            <ul>
+              <li>Pobłogosław, Jezu drogi</li>
+              <li>Gdzie miłość wzajemna i dobroć</li>
+              <li>Abba Ojcze</li>
+              <li>Panie, dobry jak chleb</li>
+              <li>Barka</li>
+            </ul>
+          </article>
+        </div>
+        <p class="rep-note reveal">Nie widzisz swojego utworu? Przygotuję aranżację na życzenie – <a href="#kontakt">napisz do mnie</a>.</p>
       </div>
     </section>
 
@@ -283,6 +346,47 @@
       </div>
     </section>
 
+    <!-- PYTANIA (TREŚĆ DO WERYFIKACJI: odpowiedzi przykładowe) -->
+    <section id="pytania" class="section faq" aria-labelledby="faq-title">
+      <div class="container faq__inner">
+        <header class="section-head">
+          <p class="eyebrow reveal">Pytania</p>
+          <h2 id="faq-title" class="reveal">Najczęstsze pytania</h2>
+        </header>
+        <div class="faq-list">
+          <details class="faq-item" name="faq" open>
+            <summary>Jak zarezerwować termin?</summary>
+            <div class="faq-item__body"><p>Zadzwoń, napisz e-mail lub wypełnij formularz kontaktowy. Sprawdzę dostępność w wybranym dniu, omówimy szczegóły uroczystości, a po potwierdzeniu termin jest zarezerwowany tylko dla Was.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>Z jakim wyprzedzeniem warto się odezwać?</summary>
+            <div class="faq-item__body"><p>Najlepiej kilka miesięcy przed uroczystością – szczególnie w sezonie ślubnym (od maja do września), kiedy soboty szybko się zapełniają. Warto jednak zapytać także o bliższe terminy.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>Czy grasz poza Krakowem?</summary>
+            <div class="faq-item__body"><p>Tak. Gram w Krakowie i całej Małopolsce, a po wcześniejszym ustaleniu również w innych miejscach w Polsce. Koszt dojazdu ustalamy indywidualnie.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>Czy możemy wybrać własne utwory?</summary>
+            <div class="faq-item__body"><p>Oczywiście. Możecie wybrać utwory z mojego repertuaru albo poprosić o aranżację Waszej ulubionej piosenki. Chętnie doradzę, co sprawdzi się na wejście, podczas przysięgi, podpisywania dokumentów i na wyjście.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>Czy harfa potrzebuje nagłośnienia?</summary>
+            <div class="faq-item__body"><p>Harfa celtycka jest instrumentem akustycznym – w kościele, sali ślubów czy kameralnym plenerze brzmi pięknie bez nagłośnienia. Przy dużej liczbie gości na otwartej przestrzeni warto pomyśleć o delikatnym nagłośnieniu.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>A co, jeśli ślub jest w plenerze i pada deszcz?</summary>
+            <div class="faq-item__body"><p>Harfa nie może stać w deszczu ani w pełnym słońcu, dlatego na ślub plenerowy potrzebne jest zadaszone lub zacienione miejsce. Wszystko ustalamy wcześniej, razem z planem awaryjnym.</p></div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>Czy grasz też poza ceremonią?</summary>
+            <div class="faq-item__body"><p>Tak – podczas koktajlu, obiadu weselnego, chrzcin, bankietów i innych uroczystości. Muzyka na harfie to także wyjątkowy prezent dla bliskich, np. na rocznicę czy zaręczyny.</p></div>
+          </details>
+        </div>
+        <p class="rep-note reveal">Nie ma tu Twojego pytania? <a href="#kontakt">Napisz – chętnie odpowiem</a>.</p>
+      </div>
+    </section>
+
     <!-- KONTAKT -->
     <section id="kontakt" class="section contact" aria-labelledby="contact-title">
       <div class="container contact__grid">
@@ -291,6 +395,7 @@
           <h2 id="contact-title" class="reveal">Masz pytania?</h2>
           <p class="reveal">Marzy Ci się oprawa muzyczna ślubu na harfie? Chcesz zarezerwować termin? Masz pytania o oprawę muzyczną ślubu? A może po prostu chcesz zrobić wyjątkowy prezent swoim bliskim?</p>
           <p class="reveal">Zadzwoń, napisz lub wypełnij formularz kontaktowy.</p>
+          <p class="contact__area reveal">Kraków · Małopolska · cała Polska po ustaleniu</p>
           <ul class="contact__links">
             <li class="reveal">
               <a href="tel:+48509838509">

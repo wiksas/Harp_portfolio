@@ -15,8 +15,10 @@ Wszystkie animacje przewijania to czyste **CSS Scroll-driven Animations**
 | O mnie | „struny harfy” rysowane kolejno, łukowe zdjęcie odsłaniane `clip-path`, złote podkreślenia kluczowych fraz |
 | Cytat | paralaksa tła, cytat wyostrza się w centrum ekranu |
 | Posłuchaj | karty wideo z rozłożoną paralaksą; na telefonie karuzela `view(inline)` |
+| Repertuar | karty wjeżdżają wachlarzem; na telefonie karuzela `view(inline)` |
 | Galeria | przewijanie pionowe przesuwa przypiętą poziomą taśmę zdjęć |
 | Opinie | karty „układające się w stos” (desktop) |
+| Pytania | pytania wsuwają się kolejno; akordeon `<details name>` z animacją wysokości (`::details-content`) |
 | Pasek „Zadzwoń / Napisz” (telefon) | pojawia się po hero, chowa się przy sekcji Kontakt (`timeline-scope`) |
 
 Przeglądarki bez wsparcia (np. Firefox bez flagi) dostają pełną, statyczną wersję strony.
