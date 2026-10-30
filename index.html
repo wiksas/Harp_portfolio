@@ -25,8 +25,11 @@
 
   <link rel="preload" href="assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/img/harfa-swieta-1400.webp"
+  <link rel="preload" as="image" href="assets/img/harfa-swieta-1400.webp" media="(min-aspect-ratio: 3/4)"
         imagesrcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w, assets/img/harfa-swieta-2200.webp 2200w"
+        imagesizes="100vw">
+  <link rel="preload" as="image" href="assets/img/hero-mobile-800.webp" media="(max-aspect-ratio: 3/4)"
+        imagesrcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w"
         imagesizes="100vw">
   <script>document.documentElement.style.setProperty("--app-h", innerHeight + "px");</script>
   <link rel="stylesheet" href="assets/css/style.css">
@@ -85,11 +88,13 @@
   <main id="top">
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__media">
+      <picture class="hero__media">
+        <source media="(max-aspect-ratio: 3/4)" width="1200" height="1800"
+                srcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w" sizes="100vw">
         <img src="assets/img/harfa-swieta-1400.webp"
              srcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w, assets/img/harfa-swieta-2200.webp 2200w"
              sizes="100vw" width="2200" height="1684" alt="Justyna Sasnal grająca na harfie" fetchpriority="high">
-      </div>
+      </picture>
       <div class="hero__content">
         <p class="eyebrow">Justyna Sasnal · harfistka</p>
         <h1 id="hero-title">Harfa na <em>wyjątkowe</em> okazje</h1>
@@ -119,9 +124,9 @@
         <div class="about__text">
           <p class="eyebrow reveal">O mnie</p>
           <h2 id="about-title" class="reveal">Muzyka z&nbsp;pasji, miłość od pierwszego wejrzenia</h2>
-          <p class="reveal">Nazywam się Justyna Sasnal. Z zawodu, a przede wszystkim z pasji jestem muzykiem. Jeśli wierzycie w miłość od pierwszego wejrzenia, to właśnie w taki sposób 14 lat temu rozpoczęła się moja przygoda z harfą i gwarantuję, że tak jak mnie oczaruje ona każdego.</p>
-          <p class="reveal">Jako harfistka posiadam długoletnie doświadczenie w oprawie muzycznej ślubów, chrzcin, bankietów i innych imprez okolicznościowych. Uświetniam te wyjątkowe chwile grą na harfie celtyckiej, która dzięki temu, że jest niezwykle subtelna, delikatna i romantyczna pasuje wręcz idealnie do charakteru uroczystości zaślubin.</p>
-          <p class="reveal">Oferuję Państwu niezapomnianą i profesjonalną oprawę muzyczną ślubu. W swoim repertuarze posiadam zarówno utwory klasyczne jak i chętnie wybierane przez Pary Młode aranżacje popularnych utworów.</p>
+          <p class="reveal">Nazywam się Justyna Sasnal. Z zawodu, a przede wszystkim z pasji jestem muzykiem. Jeśli wierzycie w <span class="ink">miłość od pierwszego wejrzenia</span>, to właśnie w taki sposób 14 lat temu rozpoczęła się moja przygoda z harfą i gwarantuję, że tak jak mnie oczaruje ona każdego.</p>
+          <p class="reveal">Jako harfistka posiadam długoletnie doświadczenie w oprawie muzycznej ślubów, chrzcin, bankietów i innych imprez okolicznościowych. Uświetniam te wyjątkowe chwile grą na harfie celtyckiej, która dzięki temu, że jest niezwykle <span class="ink">subtelna, delikatna i romantyczna</span> pasuje wręcz idealnie do charakteru uroczystości zaślubin.</p>
+          <p class="reveal">Oferuję Państwu <span class="ink">niezapomnianą i profesjonalną oprawę muzyczną ślubu</span>. W swoim repertuarze posiadam zarówno utwory klasyczne jak i chętnie wybierane przez Pary Młode aranżacje popularnych utworów.</p>
           <ul class="occasions" aria-label="Okazje">
             <li>Śluby</li><li>Chrzciny</li><li>Bankiety</li><li>Uroczystości</li>
           </ul>
@@ -211,20 +216,20 @@
       <div class="gallery__pin">
         <div class="gallery__sticky">
           <ul class="gallery__track">
-            <li><a href="assets/img/ceremonia-plenerowa-para-1100.webp"><img src="assets/img/ceremonia-plenerowa-para-600.webp" width="600" height="800" loading="lazy" alt="Para Młoda składa przysięgę, obok harfistka podczas ceremonii w plenerze"></a></li>
-            <li><a href="assets/img/harfa-taras-wawel-1100.webp"><img src="assets/img/harfa-taras-wawel-600.webp" width="600" height="901" loading="lazy" alt="Harfistka na tarasie z widokiem na Wawel"></a></li>
-            <li><a href="assets/img/slub-kosciol-harfa-1000.webp"><img src="assets/img/slub-kosciol-harfa-600.webp" width="600" height="901" loading="lazy" alt="Harfa przy ołtarzu podczas ślubu w kościele"></a></li>
-            <li><a href="assets/img/harfistka-usmiech-1100.webp"><img src="assets/img/harfistka-usmiech-600.webp" width="600" height="900" loading="lazy" alt="Uśmiechnięta harfistka grająca na sali weselnej"></a></li>
-            <li><a href="assets/img/ceremonia-kosciol-1600.webp"><img src="assets/img/ceremonia-kosciol-1100.webp" width="1100" height="732" loading="lazy" alt="Para Młoda i goście podczas ceremonii z harfą w tle"></a></li>
-            <li><a href="assets/img/harfistka-ogrod-biel-1100.webp"><img src="assets/img/harfistka-ogrod-biel-600.webp" width="600" height="900" loading="lazy" alt="Harfistka w białej sukni gra w ogrodzie"></a></li>
-            <li><a href="assets/img/slub-plenerowy-ogrod-1100.webp"><img src="assets/img/slub-plenerowy-ogrod-600.webp" width="600" height="799" loading="lazy" alt="Harfistka na ślubie plenerowym w ogrodzie"></a></li>
-            <li><a href="assets/img/dekoracje-sala-harfa-1100.webp"><img src="assets/img/dekoracje-sala-harfa-600.webp" width="600" height="900" loading="lazy" alt="Kwiatowe dekoracje stołu weselnego z harfą w tle"></a></li>
-            <li><a href="assets/img/harfistka-ceremonia-1600.webp"><img src="assets/img/harfistka-ceremonia-1100.webp" width="1100" height="733" loading="lazy" alt="Justyna Sasnal gra na harfie podczas ceremonii"></a></li>
-            <li><a href="assets/img/harfa-love-1100.webp"><img src="assets/img/harfa-love-600.webp" width="600" height="800" loading="lazy" alt="Harfistka przy dekoracji z napisem LOVE"></a></li>
-            <li><a href="assets/img/slub-plenerowy-dwor-1100.webp"><img src="assets/img/slub-plenerowy-dwor-600.webp" width="600" height="750" loading="lazy" alt="Harfa przed dworem przygotowana do ślubu plenerowego"></a></li>
-            <li><a href="assets/img/harfistka-sala-weselna-1100.webp"><img src="assets/img/harfistka-sala-weselna-600.webp" width="600" height="901" loading="lazy" alt="Harfistka w różowej sukni na tle kwiatowych dekoracji"></a></li>
-            <li><a href="assets/img/slub-cywilny-palac-1600.webp"><img src="assets/img/slub-cywilny-palac-1100.webp" width="1100" height="826" loading="lazy" alt="Harfistka w sali ślubów w pałacu"></a></li>
-            <li><a href="assets/img/harfa-swieta-2200.webp"><img src="assets/img/harfa-swieta-800.webp" width="800" height="612" loading="lazy" alt="Harfistka przy harfie w świątecznej scenerii"></a></li>
+            <li><a href="assets/img/ceremonia-plenerowa-para-1100.webp"><img src="assets/img/ceremonia-plenerowa-para-600.webp" srcset="assets/img/ceremonia-plenerowa-para-600.webp 600w, assets/img/ceremonia-plenerowa-para-1100.webp 1100w" sizes="50vh" width="600" height="800" loading="lazy" alt="Para Młoda składa przysięgę, obok harfistka podczas ceremonii w plenerze"></a></li>
+            <li><a href="assets/img/harfa-taras-wawel-1100.webp"><img src="assets/img/harfa-taras-wawel-600.webp" srcset="assets/img/harfa-taras-wawel-600.webp 600w, assets/img/harfa-taras-wawel-1100.webp 1100w" sizes="42vh" width="600" height="901" loading="lazy" alt="Harfistka na tarasie z widokiem na Wawel"></a></li>
+            <li><a href="assets/img/slub-kosciol-harfa-1000.webp"><img src="assets/img/slub-kosciol-harfa-600.webp" srcset="assets/img/slub-kosciol-harfa-600.webp 600w, assets/img/slub-kosciol-harfa-1000.webp 1000w" sizes="42vh" width="600" height="901" loading="lazy" alt="Harfa przy ołtarzu podczas ślubu w kościele"></a></li>
+            <li><a href="assets/img/harfistka-usmiech-1100.webp"><img src="assets/img/harfistka-usmiech-600.webp" srcset="assets/img/harfistka-usmiech-600.webp 600w, assets/img/harfistka-usmiech-1100.webp 1100w" sizes="42vh" width="600" height="900" loading="lazy" alt="Uśmiechnięta harfistka grająca na sali weselnej"></a></li>
+            <li><a href="assets/img/ceremonia-kosciol-1600.webp"><img src="assets/img/ceremonia-kosciol-600.webp" srcset="assets/img/ceremonia-kosciol-600.webp 600w, assets/img/ceremonia-kosciol-1100.webp 1100w, assets/img/ceremonia-kosciol-1600.webp 1600w" sizes="95vh" width="1100" height="732" loading="lazy" alt="Para Młoda i goście podczas ceremonii z harfą w tle"></a></li>
+            <li><a href="assets/img/harfistka-ogrod-biel-1100.webp"><img src="assets/img/harfistka-ogrod-biel-600.webp" srcset="assets/img/harfistka-ogrod-biel-600.webp 600w, assets/img/harfistka-ogrod-biel-1100.webp 1100w" sizes="42vh" width="600" height="900" loading="lazy" alt="Harfistka w białej sukni gra w ogrodzie"></a></li>
+            <li><a href="assets/img/slub-plenerowy-ogrod-1100.webp"><img src="assets/img/slub-plenerowy-ogrod-600.webp" srcset="assets/img/slub-plenerowy-ogrod-600.webp 600w, assets/img/slub-plenerowy-ogrod-1100.webp 1100w" sizes="50vh" width="600" height="799" loading="lazy" alt="Harfistka na ślubie plenerowym w ogrodzie"></a></li>
+            <li><a href="assets/img/dekoracje-sala-harfa-1100.webp"><img src="assets/img/dekoracje-sala-harfa-600.webp" srcset="assets/img/dekoracje-sala-harfa-600.webp 600w, assets/img/dekoracje-sala-harfa-1100.webp 1100w" sizes="42vh" width="600" height="900" loading="lazy" alt="Kwiatowe dekoracje stołu weselnego z harfą w tle"></a></li>
+            <li><a href="assets/img/harfistka-ceremonia-1600.webp"><img src="assets/img/harfistka-ceremonia-600.webp" srcset="assets/img/harfistka-ceremonia-600.webp 600w, assets/img/harfistka-ceremonia-1100.webp 1100w, assets/img/harfistka-ceremonia-1600.webp 1600w" sizes="95vh" width="1100" height="733" loading="lazy" alt="Justyna Sasnal gra na harfie podczas ceremonii"></a></li>
+            <li><a href="assets/img/harfa-love-1100.webp"><img src="assets/img/harfa-love-600.webp" srcset="assets/img/harfa-love-600.webp 600w, assets/img/harfa-love-1100.webp 1100w" sizes="50vh" width="600" height="800" loading="lazy" alt="Harfistka przy dekoracji z napisem LOVE"></a></li>
+            <li><a href="assets/img/slub-plenerowy-dwor-1100.webp"><img src="assets/img/slub-plenerowy-dwor-600.webp" srcset="assets/img/slub-plenerowy-dwor-600.webp 600w, assets/img/slub-plenerowy-dwor-1100.webp 1100w" sizes="52vh" width="600" height="750" loading="lazy" alt="Harfa przed dworem przygotowana do ślubu plenerowego"></a></li>
+            <li><a href="assets/img/harfistka-sala-weselna-1100.webp"><img src="assets/img/harfistka-sala-weselna-600.webp" srcset="assets/img/harfistka-sala-weselna-600.webp 600w, assets/img/harfistka-sala-weselna-1100.webp 1100w" sizes="42vh" width="600" height="901" loading="lazy" alt="Harfistka w różowej sukni na tle kwiatowych dekoracji"></a></li>
+            <li><a href="assets/img/slub-cywilny-palac-1600.webp"><img src="assets/img/slub-cywilny-palac-600.webp" srcset="assets/img/slub-cywilny-palac-600.webp 600w, assets/img/slub-cywilny-palac-1100.webp 1100w, assets/img/slub-cywilny-palac-1600.webp 1600w" sizes="85vh" width="1100" height="826" loading="lazy" alt="Harfistka w sali ślubów w pałacu"></a></li>
+            <li><a href="assets/img/harfa-swieta-2200.webp"><img src="assets/img/harfa-swieta-800.webp" srcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w" sizes="82vh" width="800" height="612" loading="lazy" alt="Harfistka przy harfie w świątecznej scenerii"></a></li>
           </ul>
           <div class="gallery__progress" aria-hidden="true"><span></span></div>
           <p class="gallery__hint">
@@ -360,6 +365,14 @@
     </section>
   </main>
 
+  <nav class="quick-contact" aria-label="Szybki kontakt">
+    <a class="btn btn--gold" href="tel:+48509838509">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8Z"/></svg>
+      Zadzwoń
+    </a>
+    <a class="btn btn--ghost" href="#kontakt">Napisz</a>
+  </nav>
+
   <footer class="site-footer">
     <img src="assets/img/logo-harfa.png" width="111" height="160" alt="" loading="lazy">
     <p>Marry with Harp · Justyna Sasnal · Harfa na ślubie</p>
@@ -367,8 +380,11 @@
   </footer>
 
   <dialog class="lightbox" aria-label="Podgląd zdjęcia">
-    <form method="dialog"><button class="lightbox__close" aria-label="Zamknij">×</button></form>
     <img alt="">
+    <p class="lightbox__counter" aria-live="polite"></p>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Poprzednie zdjęcie">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Następne zdjęcie">›</button>
+    <form method="dialog"><button class="lightbox__close" aria-label="Zamknij">×</button></form>
   </dialog>
 </body>
 </html>

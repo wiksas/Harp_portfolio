@@ -35,21 +35,62 @@ videos.forEach((v) => {
   v.addEventListener("play", () => videos.forEach((o) => o !== v && o.pause()));
 });
 
-// Gallery lightbox. Without JS the links simply open the full-size image.
+// Gallery lightbox with prev/next (buttons, ← →, swipe).
+// Without JS the links simply open the full-size image.
 const lightbox = document.querySelector(".lightbox");
 const lightboxImg = lightbox.querySelector("img");
-document.querySelector(".gallery__track").addEventListener("click", (e) => {
-  const link = e.target.closest("a");
-  if (!link) return;
-  e.preventDefault();
+const counter = lightbox.querySelector(".lightbox__counter");
+const galleryLinks = [...document.querySelectorAll(".gallery__track a")];
+const calm = matchMedia("(prefers-reduced-motion: reduce)");
+let current = 0;
+
+const show = (i) => {
+  current = (i + galleryLinks.length) % galleryLinks.length;
+  const link = galleryLinks[current];
   lightboxImg.src = link.href;
   lightboxImg.alt = link.querySelector("img").alt;
-  lightbox.showModal();
+  counter.textContent = `${current + 1} / ${galleryLinks.length}`;
+  if (!calm.matches) lightboxImg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250 });
+};
+
+galleryLinks.forEach((link, i) =>
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    show(i);
+    lightbox.showModal();
+  })
+);
+lightbox.querySelector(".lightbox__nav--prev").addEventListener("click", () => show(current - 1));
+lightbox.querySelector(".lightbox__nav--next").addEventListener("click", () => show(current + 1));
+lightbox.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") show(current - 1);
+  if (e.key === "ArrowRight") show(current + 1);
+});
+let touchX = null;
+let swiped = false;
+lightbox.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") touchX = e.clientX; });
+lightbox.addEventListener("pointerup", (e) => {
+  if (touchX === null) return;
+  const dx = e.clientX - touchX;
+  touchX = null;
+  swiped = Math.abs(dx) > 50;
+  if (swiped) show(current + (dx < 0 ? 1 : -1));
 });
 lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.close();
+  if (e.target === lightbox && !swiped) lightbox.close();
+  swiped = false;
 });
 lightbox.addEventListener("close", () => lightboxImg.removeAttribute("src"));
+
+// Polish typography: keep single-letter words (w, z, i, a, o, u) with the next word.
+const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+  acceptNode: (n) => (n.parentElement.closest("script, style, textarea") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+});
+const orphan = /(^|[\s\u00a0(„])([aiouwzAIOUWZ]) (?=\S)/g;
+for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+  if (orphan.test(n.data)) n.data = n.data.replace(orphan, "$1$2\u00a0").replace(orphan, "$1$2\u00a0");
+  orphan.lastIndex = 0;
+}
 
 // Date field: no past dates; "Wybierz datę" placeholder while empty.
 const dateInput = document.getElementById("f-date");
