@@ -82,6 +82,24 @@ lightbox.addEventListener("click", (e) => {
 });
 lightbox.addEventListener("close", () => lightboxImg.removeAttribute("src"));
 
+// Carousels on phones (videos, repertoire): ‹ › buttons step one card,
+// and are disabled at either end.
+document.querySelectorAll(".carousel-nav").forEach((nav) => {
+  const track = document.getElementById(nav.dataset.track);
+  const [prev, next] = nav.querySelectorAll(".carousel-nav__btn");
+  const step = () => track.firstElementChild.offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+  const go = (dir) => track.scrollBy({ left: dir * step(), behavior: calm.matches ? "auto" : "smooth" });
+  prev.addEventListener("click", () => go(-1));
+  next.addEventListener("click", () => go(1));
+  const sync = () => {
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+  };
+  track.addEventListener("scroll", sync, { passive: true });
+  addEventListener("resize", sync);
+  sync();
+});
+
 // Polish typography: keep single-letter words (w, z, i, a, o, u) with the next word.
 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
   acceptNode: (n) => (n.parentElement.closest("script, style, textarea") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),

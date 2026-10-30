@@ -25,8 +25,8 @@
 
   <link rel="preload" href="assets/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/img/hero-slub-1400.webp" media="(min-aspect-ratio: 3/4)"
-        imagesrcset="assets/img/hero-slub-1400.webp 1400w, assets/img/hero-slub-2200.webp 2200w"
+  <link rel="preload" as="image" href="assets/img/harfistka-ceremonia-1600.webp" media="(min-aspect-ratio: 3/4)"
+        imagesrcset="assets/img/harfistka-ceremonia-1100.webp 1100w, assets/img/harfistka-ceremonia-1600.webp 1600w, assets/img/harfistka-ceremonia-2400.webp 2400w"
         imagesizes="100vw">
   <link rel="preload" as="image" href="assets/img/hero-mobile-800.webp" media="(max-aspect-ratio: 3/4)"
         imagesrcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w"
@@ -93,9 +93,9 @@
       <picture class="hero__media">
         <source media="(max-aspect-ratio: 3/4)" width="1200" height="1800"
                 srcset="assets/img/hero-mobile-800.webp 800w, assets/img/hero-mobile-1200.webp 1200w" sizes="100vw">
-        <img src="assets/img/hero-slub-1400.webp"
-             srcset="assets/img/hero-slub-1400.webp 1400w, assets/img/hero-slub-2200.webp 2200w"
-             sizes="100vw" width="2200" height="1375" alt="Ceremonia ślubna w plenerze z harfistką Justyną Sasnal" fetchpriority="high">
+        <img src="assets/img/harfistka-ceremonia-1600.webp"
+             srcset="assets/img/harfistka-ceremonia-1100.webp 1100w, assets/img/harfistka-ceremonia-1600.webp 1600w, assets/img/harfistka-ceremonia-2400.webp 2400w"
+             sizes="100vw" width="2400" height="1600" alt="Justyna Sasnal gra na harfie podczas ceremonii ślubnej" fetchpriority="high">
       </picture>
       <div class="hero__content">
         <p class="eyebrow">Justyna Sasnal · harfistka</p>
@@ -155,7 +155,7 @@
           <p class="eyebrow reveal">Posłuchaj</p>
           <h2 id="listen-title" class="reveal">Tak może brzmieć oprawa muzyczna Twojego ślubu…</h2>
         </header>
-        <div class="videos">
+        <div class="videos" id="videos-track">
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-wejscie-pary-mlodej.webp" width="720" height="1280">
               <source src="assets/video/wejscie-pary-mlodej.mp4" type="video/mp4">
@@ -206,6 +206,11 @@
             <figcaption>Ceremonia w plenerze</figcaption>
           </figure>
         </div>
+        <div class="carousel-nav" data-track="videos-track" style="--count: 8">
+          <button class="carousel-nav__btn" type="button" data-dir="-1" aria-controls="videos-track" aria-label="Poprzedni film">‹</button>
+          <div class="carousel-nav__bar" aria-hidden="true"><span></span></div>
+          <button class="carousel-nav__btn" type="button" data-dir="1" aria-controls="videos-track" aria-label="Następny film">›</button>
+        </div>
       </div>
     </section>
 
@@ -217,7 +222,7 @@
           <h2 id="repertoire-title" class="reveal">Od klasyki po Waszą ulubioną piosenkę</h2>
           <p class="reveal">Muzykę dobieram razem z Parą Młodą do każdego momentu uroczystości – od wejścia, przez przysięgę, po życzenia. Oto kilka propozycji z mojego repertuaru.</p>
         </header>
-        <div class="rep-grid">
+        <div class="rep-grid" id="rep-track">
           <article class="rep-card">
             <span class="rep-card__num" aria-hidden="true">01</span>
             <h3>Klasyka</h3>
@@ -264,6 +269,11 @@
               <li>Barka</li>
             </ul>
           </article>
+        </div>
+        <div class="carousel-nav" data-track="rep-track" style="--count: 4">
+          <button class="carousel-nav__btn" type="button" data-dir="-1" aria-controls="rep-track" aria-label="Poprzednia kategoria">‹</button>
+          <div class="carousel-nav__bar" aria-hidden="true"><span></span></div>
+          <button class="carousel-nav__btn" type="button" data-dir="1" aria-controls="rep-track" aria-label="Następna kategoria">›</button>
         </div>
         <p class="rep-note reveal">Nie widzisz swojego utworu? Przygotuję aranżację na życzenie – <a href="#kontakt">napisz do mnie</a>.</p>
       </div>

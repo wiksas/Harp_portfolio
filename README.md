@@ -14,8 +14,8 @@ Wszystkie animacje przewijania to czyste **CSS Scroll-driven Animations**
 | Hero | zoom/paralaksa zdjęcia, tekst unosi się i zanika |
 | O mnie | „struny harfy” rysowane kolejno, łukowe zdjęcie odsłaniane `clip-path`, złote podkreślenia kluczowych fraz |
 | Cytat | paralaksa tła, cytat wyostrza się w centrum ekranu |
-| Posłuchaj | karty wideo z rozłożoną paralaksą; na telefonie karuzela `view(inline)` |
-| Repertuar | karty wjeżdżają wachlarzem; na telefonie karuzela `view(inline)` |
+| Posłuchaj | karty wideo z rozłożoną paralaksą; na telefonie karuzela `view(inline)` z przyciskami ‹ › i paskiem postępu (`scroll-timeline`) |
+| Repertuar | karty wjeżdżają wachlarzem; na telefonie karuzela jak wyżej |
 | Galeria | przewijanie pionowe przesuwa przypiętą poziomą taśmę zdjęć |
 | Opinie | karty „układające się w stos” (desktop) |
 | Pytania | pytania wsuwają się kolejno; akordeon `<details name>` z animacją wysokości (`::details-content`) |

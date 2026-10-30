@@ -279,6 +279,26 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 .hero__lead { max-width: 34rem; margin: 0 auto 2.2rem; font-size: clamp(1rem, 1.6vw, 1.15rem); opacity: .92; }
 .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 
+/* Landscape screens: photo with the harpist on the right, text on the left */
+@media (min-aspect-ratio: 3/4) {
+  .hero__media img { object-position: 78% 35%; }
+}
+@media (min-aspect-ratio: 3/4) and (min-width: 861px) {
+  .hero { place-items: center start; }
+  .hero__content {
+    width: min(54%, 660px); text-align: left;
+    margin-left: max(var(--gutter), (100vw - var(--container)) / 2);
+  }
+  .hero__content .eyebrow::after { display: none; }
+  .hero__lead { margin-left: 0; }
+  .hero__actions { justify-content: flex-start; }
+  .hero__media::after {
+    background:
+      linear-gradient(90deg, rgb(44 14 18 / .88) 0%, rgb(44 14 18 / .66) 38%, rgb(44 14 18 / .12) 66%, transparent 82%),
+      linear-gradient(180deg, rgb(44 14 18 / .62) 0%, transparent 24%, transparent 72%, rgb(44 14 18 / .55) 100%);
+  }
+}
+
 .hero__scroll {
   position: absolute; bottom: 1.6rem; left: 50%; translate: -50% 0;
   width: 1px; height: 64px; background: rgb(250 246 240 / .3); overflow: hidden;
@@ -518,6 +538,46 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   }
   .rep-grid::-webkit-scrollbar { display: none; }
   .rep-card { flex: 0 0 76vw; scroll-snap-align: center; }
+}
+
+/* ---------- Carousel controls (phones: videos + repertoire) ---------- */
+.carousel-nav { display: none; }
+@media (max-width: 640px) {
+  .carousel-nav {
+    display: flex; align-items: center; gap: 1rem;
+    margin: .5rem auto 0; max-width: 340px; color: var(--wine);
+  }
+  .repertoire .carousel-nav { color: var(--gold-soft); }
+  .carousel-nav__btn {
+    flex: none; width: 46px; height: 46px; border-radius: 50%; padding: 0 0 3px;
+    display: grid; place-items: center; cursor: pointer;
+    font: 300 2rem/1 var(--serif); color: inherit;
+    background: transparent; border: 1px solid var(--gold);
+    transition: background-color .25s var(--ease), opacity .25s var(--ease);
+  }
+  .carousel-nav__btn:active { background: var(--gold); color: var(--wine-deep); }
+  .carousel-nav__btn:disabled { opacity: .3; cursor: default; }
+  .carousel-nav__bar {
+    flex: 1; height: 2px; border-radius: 2px; overflow: hidden;
+    background: color-mix(in srgb, var(--gold) 25%, transparent);
+    visibility: hidden;              /* shown only when the thumb can follow the scroll */
+  }
+  .carousel-nav__bar span {
+    display: block; height: 100%; width: calc(100% / var(--count));
+    background: var(--gold); border-radius: inherit;
+  }
+  /* the thumb is driven by the carousel's own horizontal scroll */
+  @supports (animation-timeline: scroll()) {
+    .listen .container { timeline-scope: --videos-x; }
+    .videos { scroll-timeline: --videos-x inline; }
+    .repertoire .container { timeline-scope: --rep-x; }
+    .rep-grid { scroll-timeline: --rep-x inline; }
+    .carousel-nav__bar { visibility: visible; }
+    .carousel-nav__bar span { animation: thumb linear both; }
+    [data-track="videos-track"] .carousel-nav__bar span { animation-timeline: --videos-x; }
+    [data-track="rep-track"] .carousel-nav__bar span { animation-timeline: --rep-x; }
+    @keyframes thumb { to { translate: calc((var(--count) - 1) * 100%) 0; } }
+  }
 }
 
 /* ---------- FAQ ---------- */
