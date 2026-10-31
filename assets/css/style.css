@@ -473,8 +473,10 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 }
 
 @media (max-width: 640px) {
-  .gallery__track img { height: calc(var(--app-h) * .6); }
-  .gallery__track { overscroll-behavior-x: contain; scrollbar-width: none; }
+  /* every photo fits the screen (wide ones shrink instead of overflowing),
+     so the neighbours always peek out on both sides */
+  .gallery__track { padding-inline: 12vw; scroll-padding-inline: 12vw; align-items: center; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .gallery__track img { height: auto; width: auto; max-width: 76vw; max-height: calc(var(--app-h) * .6); }
   .gallery__track::-webkit-scrollbar { display: none; }
 }
 /* the repertoire is a grid on wider screens: nothing to pin or hint there */
