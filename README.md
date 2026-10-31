@@ -16,7 +16,7 @@ Wszystkie animacje przewijania to czyste **CSS Scroll-driven Animations**
 | Cytat | paralaksa tła, cytat wyostrza się w centrum ekranu |
 | Posłuchaj | karty wideo z rozłożoną paralaksą; na telefonie karuzela `view(inline)` |
 | Repertuar | karty wjeżdżają wachlarzem; na telefonie – jak w „Posłuchaj” – karuzela przesuwana palcem (`scroll-snap` + `view(inline)`) |
-| Galeria | desktop: przewijanie pionowe przesuwa przypiętą poziomą taśmę zdjęć; na telefonie – jak w „Posłuchaj” – karuzela przesuwana palcem |
+| Galeria | pasek zdjęć z `scroll-snap`; desktop: przyciski ‹ › i pasek postępu, telefon: przesuwanie palcem z efektem `view(inline)` jak w „Posłuchaj” |
 | Opinie | karty „układające się w stos” (desktop) |
 | Pytania | pytania wsuwają się kolejno; akordeon `<details name>` z animacją wysokości (`::details-content`) |
 | Pasek „Zadzwoń / Napisz” (telefon) | pojawia się po hero, chowa się przy sekcji Kontakt (`timeline-scope`) |

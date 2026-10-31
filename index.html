@@ -217,8 +217,6 @@
           <h2 id="repertoire-title" class="reveal">Od klasyki po Waszą ulubioną piosenkę</h2>
           <p class="reveal">Muzykę dobieram razem z Parą Młodą do każdego momentu uroczystości – od wejścia, przez przysięgę, po życzenia. Oto kilka propozycji z mojego repertuaru.</p>
         </header>
-        <div class="rep-pin">
-          <div class="rep-sticky">
         <div class="rep-grid">
           <article class="rep-card">
             <span class="rep-card__num" aria-hidden="true">01</span>
@@ -267,14 +265,10 @@
             </ul>
           </article>
         </div>
-            <div class="pin-progress" aria-hidden="true"><span></span></div>
-            <p class="pin-hint">
-              <span class="hint-arrow" aria-hidden="true"></span>
-              <span class="hint-text--scroll">Przewijaj dalej, aby zobaczyć kolejne utwory</span>
-              <span class="hint-text--swipe">Przesuń w bok, aby zobaczyć więcej utworów</span>
-            </p>
-          </div>
-        </div>
+        <p class="swipe-hint">
+          <span class="hint-arrow" aria-hidden="true"></span>
+          <span>Przesuń w bok, aby zobaczyć więcej utworów</span>
+        </p>
         <p class="rep-note reveal">Nie widzisz swojego utworu? Przygotuję aranżację na życzenie – <a href="#kontakt">napisz do mnie</a>.</p>
       </div>
     </section>
@@ -286,8 +280,8 @@
         <h2 id="gallery-title" class="reveal">Oprawa muzyczna ślubu w obiektywie</h2>
         <p class="reveal">Jako harfistka, miałam zaszczyt i przyjemność uświetnić wiele wyjątkowych uroczystości. Harfa pięknie wpasowuje się nie tylko muzycznie, ale również wizualnie w scenerię ślubną. Taka wyjątkowa oprawa muzyczna ślubu z pewnością zapadnie wszystkim w pamięci.</p>
       </header>
-      <div class="gallery__pin">
-        <div class="gallery__sticky">
+      <div class="gallery__stage">
+        <div class="gallery__viewport">
           <ul class="gallery__track">
             <li><a href="assets/img/ceremonia-plenerowa-para-1100.webp"><img src="assets/img/ceremonia-plenerowa-para-600.webp" srcset="assets/img/ceremonia-plenerowa-para-600.webp 600w, assets/img/ceremonia-plenerowa-para-1100.webp 1100w" sizes="50vh" width="600" height="800" loading="lazy" alt="Para Młoda składa przysięgę, obok harfistka podczas ceremonii w plenerze"></a></li>
             <li><a href="assets/img/harfa-taras-wawel-1100.webp"><img src="assets/img/harfa-taras-wawel-600.webp" srcset="assets/img/harfa-taras-wawel-600.webp 600w, assets/img/harfa-taras-wawel-1100.webp 1100w" sizes="42vh" width="600" height="901" loading="lazy" alt="Harfistka na tarasie z widokiem na Wawel"></a></li>
@@ -304,13 +298,14 @@
             <li><a href="assets/img/slub-cywilny-palac-1600.webp"><img src="assets/img/slub-cywilny-palac-600.webp" srcset="assets/img/slub-cywilny-palac-600.webp 600w, assets/img/slub-cywilny-palac-1100.webp 1100w, assets/img/slub-cywilny-palac-1600.webp 1600w" sizes="85vh" width="1100" height="826" loading="lazy" alt="Harfistka w sali ślubów w pałacu"></a></li>
             <li><a href="assets/img/harfa-swieta-2200.webp"><img src="assets/img/harfa-swieta-800.webp" srcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w" sizes="82vh" width="800" height="612" loading="lazy" alt="Harfistka przy harfie w świątecznej scenerii"></a></li>
           </ul>
-          <div class="pin-progress" aria-hidden="true"><span></span></div>
-          <p class="pin-hint">
-            <span class="hint-arrow" aria-hidden="true"></span>
-            <span class="hint-text--scroll">Przewijaj dalej, aby obejrzeć całą galerię</span>
-            <span class="hint-text--swipe">Przesuń w bok, aby zobaczyć więcej zdjęć</span>
-          </p>
+          <button class="gallery__arrow gallery__arrow--prev" type="button" aria-label="Poprzednie zdjęcia" hidden>‹</button>
+          <button class="gallery__arrow gallery__arrow--next" type="button" aria-label="Następne zdjęcia" hidden>›</button>
         </div>
+        <div class="gallery__progress" aria-hidden="true"><span></span></div>
+        <p class="swipe-hint">
+          <span class="hint-arrow" aria-hidden="true"></span>
+          <span>Przesuń w bok, aby zobaczyć więcej zdjęć</span>
+        </p>
       </div>
     </section>
 

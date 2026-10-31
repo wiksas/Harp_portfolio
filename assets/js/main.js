@@ -82,6 +82,28 @@ lightbox.addEventListener("click", (e) => {
 });
 lightbox.addEventListener("close", () => lightboxImg.removeAttribute("src"));
 
+// Gallery strip: ‹ › buttons and progress line (wider screens; swipe/trackpad work natively).
+const strip = document.querySelector(".gallery__track");
+const stripPrev = document.querySelector(".gallery__arrow--prev");
+const stripNext = document.querySelector(".gallery__arrow--next");
+const stripBar = document.querySelector(".gallery__progress");
+const syncStrip = () => {
+  const max = strip.scrollWidth - strip.clientWidth;
+  stripPrev.disabled = strip.scrollLeft < 2;
+  stripNext.disabled = strip.scrollLeft > max - 2;
+  stripBar.style.setProperty("--progress", max > 0 ? strip.scrollLeft / max : 0);
+};
+const stepStrip = (dir) =>
+  strip.scrollBy({ left: dir * strip.clientWidth * 0.8, behavior: calm.matches ? "auto" : "smooth" });
+strip.dataset.enhanced = "";
+stripPrev.hidden = stripNext.hidden = false;
+stripPrev.addEventListener("click", () => stepStrip(-1));
+stripNext.addEventListener("click", () => stepStrip(1));
+strip.addEventListener("scroll", syncStrip, { passive: true });
+strip.addEventListener("load", syncStrip, true);   // lazy images change the scroll width
+addEventListener("resize", syncStrip);
+syncStrip();
+
 // Polish typography: keep single-letter words (w, z, i, a, o, u) with the next word.
 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
   acceptNode: (n) => (n.parentElement.closest("script, style, textarea") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
