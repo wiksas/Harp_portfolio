@@ -474,6 +474,8 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
 
 @media (max-width: 640px) {
   .gallery__track img { height: calc(var(--app-h) * .6); }
+  .gallery__track { overscroll-behavior-x: contain; scrollbar-width: none; }
+  .gallery__track::-webkit-scrollbar { display: none; }
 }
 /* the repertoire is a grid on wider screens: nothing to pin or hint there */
 @media (min-width: 641px) {
@@ -941,60 +943,64 @@ body:has(.lightbox[open]) .quick-contact { visibility: hidden !important; }
       }
     }
 
-    /* --- Gallery: vertical scroll drives a pinned horizontal track --- */
-    .gallery__pin {
-      view-timeline: --gallery block;
-      view-timeline-inset: 0px;   /* don't shrink by scroll-padding-top (header) */
-      height: calc(var(--app-h) * 6);
+    /* --- Gallery: on wider screens vertical scroll drives a pinned horizontal track --- */
+    @media (min-width: 641px) {
+      .gallery__pin {
+        view-timeline: --gallery block;
+        view-timeline-inset: 0px;   /* don't shrink by scroll-padding-top (header) */
+        height: calc(var(--app-h) * 6);
+      }
+      .gallery__sticky {
+        position: sticky; top: 0;
+        height: var(--app-h);
+        display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
+        overflow: clip;
+      }
+      .gallery__track {
+        overflow: visible; scroll-snap-type: none;
+        width: max-content;
+        padding: 0 8vw;
+        animation: gallery-slide linear both;
+        animation-timeline: --gallery;
+        animation-range: contain 0% contain 100%;
+      }
+      @keyframes gallery-slide {
+        to { translate: calc(-100% + 100vw) 0; }
+      }
+      .gallery__track img { height: min(calc(var(--app-h) * .62), 600px); }
+      .pin-progress {
+        display: block; width: min(100% - 2 * var(--gutter), 420px); height: 1px; margin-inline: auto;
+        background: var(--line);
+      }
+      .pin-progress span {
+        display: block; height: 100%; background: var(--gold); transform-origin: left;
+        animation: progress linear both;
+        animation-range: contain 0% contain 100%;
+      }
+      /* Hint: "keep scrolling" while pinned, fades out as the last item arrives */
+      .hint-text--swipe { display: none; }
+      .hint-text--scroll { display: inline; }
+      .pin-hint .hint-arrow::before {
+        margin: -3px 0 0; rotate: 45deg;     /* ↓ : keep scrolling */
+        animation: hint-nudge-y 1.6s var(--ease) infinite;
+      }
+      @keyframes hint-nudge-y { 50% { translate: 0 4px; } }
+      .pin-hint {
+        animation: hint-fade linear both;
+        animation-range: contain 0% contain 100%;
+      }
+      .gallery .pin-progress span, .gallery .pin-hint { animation-timeline: --gallery; }
+      @keyframes hint-fade {
+        0%, 80% { opacity: 1; }
+        95%, 100% { opacity: 0; }
+      }
     }
-    .gallery__sticky {
-      position: sticky; top: 0;
-      height: var(--app-h);
-      display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
-      overflow: clip;
-    }
-    .gallery__track {
-      overflow: visible; scroll-snap-type: none;
-      width: max-content;
-      padding: 0 8vw;
-      animation: gallery-slide linear both;
-      animation-timeline: --gallery;
-      animation-range: contain 0% contain 100%;
-    }
-    @keyframes gallery-slide {
-      to { translate: calc(-100% + 100vw) 0; }
-    }
-    .gallery__track img { height: min(calc(var(--app-h) * .62), 600px); }
-    .pin-progress {
-      display: block; width: min(100% - 2 * var(--gutter), 420px); height: 1px; margin-inline: auto;
-      background: var(--line);
-    }
-    .pin-progress span {
-      display: block; height: 100%; background: var(--gold); transform-origin: left;
-      animation: progress linear both;
-      animation-range: contain 0% contain 100%;
-    }
-    /* Hint: "keep scrolling" while pinned, fades out as the last item arrives */
-    .hint-text--swipe { display: none; }
-    .hint-text--scroll { display: inline; }
-    .pin-hint .hint-arrow::before {
-      margin: -3px 0 0; rotate: 45deg;     /* ↓ : keep scrolling */
-      animation: hint-nudge-y 1.6s var(--ease) infinite;
-    }
-    @keyframes hint-nudge-y { 50% { translate: 0 4px; } }
-    .pin-hint {
-      animation: hint-fade linear both;
-      animation-range: contain 0% contain 100%;
-    }
-    .gallery .pin-progress span, .gallery .pin-hint { animation-timeline: --gallery; }
-    @keyframes hint-fade {
-      0%, 80% { opacity: 1; }
-      95%, 100% { opacity: 0; }
-    }
+    /* Phones: the gallery is a native swipe carousel with the video focus effect */
     @media (max-width: 640px) {
-      .gallery__pin { height: calc(var(--app-h) * 7); }
-      .gallery__track { padding: 0 10vw; }
-      .gallery__track img { height: calc(var(--app-h) * .6); }
+      .gallery__track li {
+        animation: card-focus linear both;
+        animation-timeline: view(inline);
+      }
     }
 
     /* --- Reviews: stacking cards (only where a card fits on screen) --- */
@@ -1047,30 +1053,15 @@ body:has(.lightbox[open]) .quick-contact { visibility: hidden !important; }
       animation-range: cover;
     }
     @keyframes num-drift { from { translate: 0 18px; } to { translate: 0 -18px; } }
+    /* Phones: native swipe carousel, same focus effect as the videos
+       (the cards/photos scale by their position in the scroller) */
     @media (max-width: 640px) {
-      /* Phones: like the gallery – scrolling down slides the next categories in */
-      .rep-pin {
-        view-timeline: --rep block;
-        view-timeline-inset: 0px;
-        height: calc(var(--app-h) * 2.6);
+      .rep-card {
+        animation: card-focus linear both;
+        animation-timeline: view(inline);
+        animation-range: normal;
       }
-      .rep-sticky {
-        position: sticky; top: 0;
-        height: var(--app-h); padding-top: var(--header-h);
-        display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;
-        margin-inline: calc(-1 * var(--gutter));
-        overflow: clip;
-      }
-      .rep-grid {
-        overflow: visible; scroll-snap-type: none;
-        width: max-content; margin: 0; padding: 0 12vw;
-        animation: gallery-slide linear both;
-        animation-timeline: --rep;
-        animation-range: contain 0% contain 100%;
-      }
-      .rep-card { animation: none; }
-      .rep-card li { padding: .5rem 0; }
-      .repertoire .pin-progress span, .repertoire .pin-hint { animation-timeline: --rep; }
+      .rep-card__num { animation: none; }
     }
 
     /* --- FAQ: questions slide in one by one --- */
