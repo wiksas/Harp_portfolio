@@ -948,7 +948,7 @@ body:has(.lightbox[open]) .quick-contact { visibility: hidden !important; }
       .gallery__pin {
         view-timeline: --gallery block;
         view-timeline-inset: 0px;   /* don't shrink by scroll-padding-top (header) */
-        height: calc(var(--app-h) * 6);
+        height: calc(var(--app-h) * 3.5);   /* ≈ 2.5 screens of scrolling for the whole strip */
       }
       .gallery__sticky {
         position: sticky; top: 0;
