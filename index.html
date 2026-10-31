@@ -155,7 +155,7 @@
           <p class="eyebrow reveal">Posłuchaj</p>
           <h2 id="listen-title" class="reveal">Tak może brzmieć oprawa muzyczna Twojego ślubu…</h2>
         </header>
-        <div class="videos" id="videos-track">
+        <div class="videos">
           <figure class="video-card">
             <video controls preload="none" playsinline poster="assets/img/poster-wejscie-pary-mlodej.webp" width="720" height="1280">
               <source src="assets/video/wejscie-pary-mlodej.mp4" type="video/mp4">
@@ -206,11 +206,6 @@
             <figcaption>Ceremonia w plenerze</figcaption>
           </figure>
         </div>
-        <div class="carousel-nav" data-track="videos-track" style="--count: 8">
-          <button class="carousel-nav__btn" type="button" data-dir="-1" aria-controls="videos-track" aria-label="Poprzedni film">‹</button>
-          <div class="carousel-nav__bar" aria-hidden="true"><span></span></div>
-          <button class="carousel-nav__btn" type="button" data-dir="1" aria-controls="videos-track" aria-label="Następny film">›</button>
-        </div>
       </div>
     </section>
 
@@ -222,7 +217,9 @@
           <h2 id="repertoire-title" class="reveal">Od klasyki po Waszą ulubioną piosenkę</h2>
           <p class="reveal">Muzykę dobieram razem z Parą Młodą do każdego momentu uroczystości – od wejścia, przez przysięgę, po życzenia. Oto kilka propozycji z mojego repertuaru.</p>
         </header>
-        <div class="rep-grid" id="rep-track">
+        <div class="rep-pin">
+          <div class="rep-sticky">
+        <div class="rep-grid">
           <article class="rep-card">
             <span class="rep-card__num" aria-hidden="true">01</span>
             <h3>Klasyka</h3>
@@ -270,10 +267,13 @@
             </ul>
           </article>
         </div>
-        <div class="carousel-nav" data-track="rep-track" style="--count: 4">
-          <button class="carousel-nav__btn" type="button" data-dir="-1" aria-controls="rep-track" aria-label="Poprzednia kategoria">‹</button>
-          <div class="carousel-nav__bar" aria-hidden="true"><span></span></div>
-          <button class="carousel-nav__btn" type="button" data-dir="1" aria-controls="rep-track" aria-label="Następna kategoria">›</button>
+            <div class="pin-progress" aria-hidden="true"><span></span></div>
+            <p class="pin-hint">
+              <span class="hint-arrow" aria-hidden="true"></span>
+              <span class="hint-text--scroll">Przewijaj dalej, aby zobaczyć kolejne utwory</span>
+              <span class="hint-text--swipe">Przesuń w bok, aby zobaczyć więcej utworów</span>
+            </p>
+          </div>
         </div>
         <p class="rep-note reveal">Nie widzisz swojego utworu? Przygotuję aranżację na życzenie – <a href="#kontakt">napisz do mnie</a>.</p>
       </div>
@@ -304,8 +304,8 @@
             <li><a href="assets/img/slub-cywilny-palac-1600.webp"><img src="assets/img/slub-cywilny-palac-600.webp" srcset="assets/img/slub-cywilny-palac-600.webp 600w, assets/img/slub-cywilny-palac-1100.webp 1100w, assets/img/slub-cywilny-palac-1600.webp 1600w" sizes="85vh" width="1100" height="826" loading="lazy" alt="Harfistka w sali ślubów w pałacu"></a></li>
             <li><a href="assets/img/harfa-swieta-2200.webp"><img src="assets/img/harfa-swieta-800.webp" srcset="assets/img/harfa-swieta-800.webp 800w, assets/img/harfa-swieta-1400.webp 1400w" sizes="82vh" width="800" height="612" loading="lazy" alt="Harfistka przy harfie w świątecznej scenerii"></a></li>
           </ul>
-          <div class="gallery__progress" aria-hidden="true"><span></span></div>
-          <p class="gallery__hint">
+          <div class="pin-progress" aria-hidden="true"><span></span></div>
+          <p class="pin-hint">
             <span class="hint-arrow" aria-hidden="true"></span>
             <span class="hint-text--scroll">Przewijaj dalej, aby obejrzeć całą galerię</span>
             <span class="hint-text--swipe">Przesuń w bok, aby zobaczyć więcej zdjęć</span>

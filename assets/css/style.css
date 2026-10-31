@@ -447,31 +447,37 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   transition: scale .6s var(--ease);
 }
 .gallery__track a:hover img { scale: 1.04; }
-.gallery__progress { display: none; }
+/* progress line + hint under a pinned horizontal track (gallery, repertoire) */
+.pin-progress { display: none; }
 
-.gallery__hint {
+.pin-hint {
   display: flex; align-items: center; justify-content: center; gap: .8rem;
   margin: 0 auto; padding-inline: var(--gutter); text-align: center;
   font: 500 .72rem/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase;
   color: var(--wine);
 }
-.gallery__hint .hint-arrow {
+.repertoire .pin-hint { color: var(--gold-soft); }
+.pin-hint .hint-arrow {
   flex: none; width: 34px; height: 34px; border-radius: 50%;
   border: 1px solid var(--gold); display: grid; place-items: center;
 }
-.gallery__hint .hint-arrow::before {
+.pin-hint .hint-arrow::before {
   content: ""; width: 8px; height: 8px; margin-left: -3px;
   border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold);
   rotate: -45deg;                       /* → : swipe sideways */
 }
 .hint-text--scroll { display: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .gallery__hint .hint-arrow::before { animation: hint-nudge-x 1.6s var(--ease) infinite; }
+  .pin-hint .hint-arrow::before { animation: hint-nudge-x 1.6s var(--ease) infinite; }
   @keyframes hint-nudge-x { 50% { translate: 4px 0; } }
 }
 
 @media (max-width: 640px) {
   .gallery__track img { height: calc(var(--app-h) * .6); }
+}
+/* the repertoire is a grid on wider screens: nothing to pin or hint there */
+@media (min-width: 641px) {
+  .rep-pin .pin-progress, .rep-pin .pin-hint { display: none; }
 }
 
 /* ---------- Reviews ---------- */
@@ -538,46 +544,6 @@ p { margin: 0 0 1.1em; text-wrap: pretty; }
   }
   .rep-grid::-webkit-scrollbar { display: none; }
   .rep-card { flex: 0 0 76vw; scroll-snap-align: center; }
-}
-
-/* ---------- Carousel controls (phones: videos + repertoire) ---------- */
-.carousel-nav { display: none; }
-@media (max-width: 640px) {
-  .carousel-nav {
-    display: flex; align-items: center; gap: 1rem;
-    margin: .5rem auto 0; max-width: 340px; color: var(--wine);
-  }
-  .repertoire .carousel-nav { color: var(--gold-soft); }
-  .carousel-nav__btn {
-    flex: none; width: 46px; height: 46px; border-radius: 50%; padding: 0 0 3px;
-    display: grid; place-items: center; cursor: pointer;
-    font: 300 2rem/1 var(--serif); color: inherit;
-    background: transparent; border: 1px solid var(--gold);
-    transition: background-color .25s var(--ease), opacity .25s var(--ease);
-  }
-  .carousel-nav__btn:active { background: var(--gold); color: var(--wine-deep); }
-  .carousel-nav__btn:disabled { opacity: .3; cursor: default; }
-  .carousel-nav__bar {
-    flex: 1; height: 2px; border-radius: 2px; overflow: hidden;
-    background: color-mix(in srgb, var(--gold) 25%, transparent);
-    visibility: hidden;              /* shown only when the thumb can follow the scroll */
-  }
-  .carousel-nav__bar span {
-    display: block; height: 100%; width: calc(100% / var(--count));
-    background: var(--gold); border-radius: inherit;
-  }
-  /* the thumb is driven by the carousel's own horizontal scroll */
-  @supports (animation-timeline: scroll()) {
-    .listen .container { timeline-scope: --videos-x; }
-    .videos { scroll-timeline: --videos-x inline; }
-    .repertoire .container { timeline-scope: --rep-x; }
-    .rep-grid { scroll-timeline: --rep-x inline; }
-    .carousel-nav__bar { visibility: visible; }
-    .carousel-nav__bar span { animation: thumb linear both; }
-    [data-track="videos-track"] .carousel-nav__bar span { animation-timeline: --videos-x; }
-    [data-track="rep-track"] .carousel-nav__bar span { animation-timeline: --rep-x; }
-    @keyframes thumb { to { translate: calc((var(--count) - 1) * 100%) 0; } }
-  }
 }
 
 /* ---------- FAQ ---------- */
@@ -999,29 +965,28 @@ body:has(.lightbox[open]) .quick-contact { visibility: hidden !important; }
       to { translate: calc(-100% + 100vw) 0; }
     }
     .gallery__track img { height: min(calc(var(--app-h) * .62), 600px); }
-    .gallery__progress {
+    .pin-progress {
       display: block; width: min(100% - 2 * var(--gutter), 420px); height: 1px; margin-inline: auto;
       background: var(--line);
     }
-    .gallery__progress span {
+    .pin-progress span {
       display: block; height: 100%; background: var(--gold); transform-origin: left;
       animation: progress linear both;
-      animation-timeline: --gallery;
       animation-range: contain 0% contain 100%;
     }
-    /* Hint: "keep scrolling" while pinned, fades out as the last photo arrives */
+    /* Hint: "keep scrolling" while pinned, fades out as the last item arrives */
     .hint-text--swipe { display: none; }
     .hint-text--scroll { display: inline; }
-    .gallery__hint .hint-arrow::before {
+    .pin-hint .hint-arrow::before {
       margin: -3px 0 0; rotate: 45deg;     /* ↓ : keep scrolling */
       animation: hint-nudge-y 1.6s var(--ease) infinite;
     }
     @keyframes hint-nudge-y { 50% { translate: 0 4px; } }
-    .gallery__hint {
+    .pin-hint {
       animation: hint-fade linear both;
-      animation-timeline: --gallery;
       animation-range: contain 0% contain 100%;
     }
+    .gallery .pin-progress span, .gallery .pin-hint { animation-timeline: --gallery; }
     @keyframes hint-fade {
       0%, 80% { opacity: 1; }
       95%, 100% { opacity: 0; }
@@ -1083,11 +1048,29 @@ body:has(.lightbox[open]) .quick-contact { visibility: hidden !important; }
     }
     @keyframes num-drift { from { translate: 0 18px; } to { translate: 0 -18px; } }
     @media (max-width: 640px) {
-      .rep-card {
-        animation: card-focus linear both;
-        animation-timeline: view(inline);
-        animation-range: normal;
+      /* Phones: like the gallery – scrolling down slides the next categories in */
+      .rep-pin {
+        view-timeline: --rep block;
+        view-timeline-inset: 0px;
+        height: calc(var(--app-h) * 2.6);
       }
+      .rep-sticky {
+        position: sticky; top: 0;
+        height: var(--app-h); padding-top: var(--header-h);
+        display: flex; flex-direction: column; justify-content: center; gap: 1.2rem;
+        margin-inline: calc(-1 * var(--gutter));
+        overflow: clip;
+      }
+      .rep-grid {
+        overflow: visible; scroll-snap-type: none;
+        width: max-content; margin: 0; padding: 0 12vw;
+        animation: gallery-slide linear both;
+        animation-timeline: --rep;
+        animation-range: contain 0% contain 100%;
+      }
+      .rep-card { animation: none; }
+      .rep-card li { padding: .5rem 0; }
+      .repertoire .pin-progress span, .repertoire .pin-hint { animation-timeline: --rep; }
     }
 
     /* --- FAQ: questions slide in one by one --- */
